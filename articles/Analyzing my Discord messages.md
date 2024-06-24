@@ -1,3 +1,5 @@
+If you're interested in running this yourself, see the [related repository on GitHub](https://github.com/loudar/sentiment-analysis).
+
 # Analyzing my Discord messages
 
 I started using Discord in 2016. Although I've deleted a good amount of the messages I wrote since then, it's roughly 133000 of them and counting.
@@ -35,6 +37,12 @@ I was especially interested in the messages.json of every of the 954 channels. T
 Because of the quite nested folder structure, I extracted only the `Timestamp` and `Contents` fields of every message into one giant `messages.json` in the root folder of the data package.
 This way, it'd be easier to work through for processing.
 
+## Inspecting the data
+
+First, let's take a look at some general aspects of the data, like the count of messages per timeframe:
+
+![Count](/images/sentiment-analysis/count.png)
+
 ## Setting up services
 
 Because my current employer has the benefit of getting 140€ worth of Microsoft Azure credits every month for free, I figured that'd be the easiest way of analyzing the data.
@@ -69,3 +77,9 @@ Of course, many are probably neutral or mixed, but I was sceptical.
 
 Because I suspected that the sentiment analysis would work better if I provided it the correct language for each message, I ran all of those messages through language detection.
 This was easy, because the Azure Language service supported this right out of the box.
+
+## Cost
+
+Expensive, if I would've paid anything. Yes, I blew through the budget of my subscription, because Azure only updates the spending once a day. ;)
+
+![Cost](/images/sentiment-analysis/cost.png)

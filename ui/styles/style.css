@@ -70,11 +70,9 @@
 }
 
 html, body {
-    height: 100dvh;
     width: 100dvw;
     margin: 0;
     padding: 0;
-    overflow: hidden;
     line-height: 1.5;
 }
 
@@ -163,7 +161,6 @@ div {
 a {
     color: var(--blue);
     text-decoration: none;
-    font-size: 0.8em;
 }
 
 a .material-symbols-outlined {
@@ -283,7 +280,7 @@ nav {
 
 .page {
     max-width: min(800px, 100%);
-    margin: var(--gap-v) auto auto;
+    margin: var(--gap-v) auto;
     padding: var(--gap-v);
     border-radius: var(--input-border-radius);
     background: var(--bg-2);
@@ -300,6 +297,19 @@ pre {
 
 li {
     margin-left: var(--gap-v);
+    border-left: 5px solid var(--bg-4);
+    padding-left: var(--gap-h);
+    border-radius: var(--input-border-radius);
+}
+
+.article-list-item {
+    border-radius: var(--input-border-radius);
+    padding: var(--gap-h) var(--gap-v);
+    cursor: pointer;
+}
+
+.article-list-item:hover {
+    background-color: var(--bg-3);
 }
 
 .article-date {
@@ -309,4 +319,32 @@ li {
     max-width: max-content;
     border-radius: var(--input-border-radius);
     font-size: 0.85em;
+}
+
+.article img {
+    max-width: 100%;
+    max-height: 50dvh;
+}
+
+code {
+    background: var(--bg);
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+p {
+    margin: var(--gap-h) 0;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
+.flex, .flex-v {
+    display: flex;
+    gap: var(--gap-v);
+}
+
+.flex-v {
+    flex-direction: column;
 }

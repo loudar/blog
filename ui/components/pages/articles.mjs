@@ -1,4 +1,4 @@
-import {create, signalMap, store} from "https://fjs.targoninc.com/f.js";
+import {computedSignal, create, signalMap, store} from "https://fjs.targoninc.com/f.js";
 
 export class ArticlesComponent {
     static render(params, router) {
@@ -16,12 +16,26 @@ export class ArticlesComponent {
     }
 
     static articleInList(article) {
-        return create("div").classes("article-list-item")
+        const fileCreated = new Date(article.fileCreated).toLocaleDateString();
+
+        return create("div")
+            .classes("article-list-item", "flex", "space-between")
+            .onclick(e => {
+                if (e.button !== 0) {
+                    return;
+                }
+                e.preventDefault();
+                window.router.navigate(`/article/${encodeURIComponent(article.title)}`)
+            })
             .children(
                 create("a")
                     .classes("article-list-item-title")
                     .href(`/article/${encodeURIComponent(article.title)}`)
                     .text(article.title)
+                    .build(),
+                create("span")
+                    .classes("article-date")
+                    .text(fileCreated)
                     .build()
             ).build();
     }
