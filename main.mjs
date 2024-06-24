@@ -19,12 +19,17 @@ if (!fs.existsSync(articleFolder)) {
 const articleFiles = fs.readdirSync(articleFolder);
 const articles = articleFiles
     .filter(file => file.endsWith(".md"))
+    .filter(file => !file.includes("draft"))
     .map(file => {
         const filePath = path.join(articleFolder, file);
         const content = fs.readFileSync(filePath, "utf8");
         const fileCreated = new Date(fs.statSync(filePath).birthtimeMs);
+        const baseTitle = file.replaceAll(".md", "");
+        const title = baseTitle.split("-")[0].trim();
+        const id = baseTitle.split("-")[1].trim();
         return {
-            title: file.replaceAll(".md", ""),
+            title,
+            id,
             content,
             fileCreated
         };
