@@ -5,7 +5,10 @@ export class ArticleComponent {
     static render(params, router) {
         const articles = store().get("articles");
         const article = computedSignal(articles, list => list.find(article => article.title === decodeURIComponent(params.title)));
-        const content = computedSignal(article, article => article ? article.content : "Article not found");
+        const content = computedSignal(article, article => {
+            document.title = article ? article.title : "Article not found";
+            return article ? article.content : "Article not found";
+        });
         const fileCreated = computedSignal(article, article => article ? new Date(article.fileCreated).toLocaleDateString() : new Date());
 
         return create("div")
