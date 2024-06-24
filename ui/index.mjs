@@ -9,7 +9,7 @@ Api.getArticles().then(articles => store().setSignalValue("articles", articles))
 
 window.router = new Router(routes, async (route, params) => {
     console.log(`Route changed to ${route.path} with params:`, params);
-    document.title = `Venel - ${route.title}`;
+    document.title = `${route.title}`;
 
     Page.load(route.path, params, window.router);
 });
