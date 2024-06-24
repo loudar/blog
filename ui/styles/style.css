@@ -301,7 +301,6 @@ nav {
 
 pre {
     background: var(--bg);
-    padding: var(--gap-v);
     border-radius: var(--input-border-radius);
     overflow: auto;
 }
