@@ -1,5 +1,15 @@
 import {computedSignal, create, store} from "https://fjs.targoninc.com/f.js";
 import {CommonTemplates} from "../common.mjs";
+import hljs from 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/es/highlight.min.js';
+import javascript from 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/es/languages/javascript.min.js';
+import json from 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/es/languages/json.min.js';
+import css from 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/es/languages/css.min.js';
+import html from 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/es/languages/xml.min.js';
+
+hljs.registerLanguage("javascript", javascript);
+hljs.registerLanguage("json", json);
+hljs.registerLanguage("css", css);
+hljs.registerLanguage("html", html);
 
 export class ArticleComponent {
     static render(params, router) {
@@ -32,9 +42,15 @@ export class ArticleComponent {
         const converter = new window.showdown.Converter();
         const html = computedSignal(markdown, markdown => converter.makeHtml(markdown).replaceAll(" href", ' target="_blank" href'));
 
-        return create("div")
+        const content = create("div")
             .classes("article-content")
             .html(html)
             .build();
+
+        for (const element of content.querySelectorAll("pre code")) {
+            hljs.highlightElement(element);
+        }
+
+        return content;
     }
 }
