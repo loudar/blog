@@ -41,7 +41,15 @@ This way, it'd be easier to work through for processing.
 
 First, let's take a look at some general aspects of the data, like the count of messages per timeframe:
 
-![Count](/images/sentiment-analysis/count.png)
+![Count](/images/discord-sentiment/count.png "Count of messages per month")
+
+As you can see, there are a lot of messages from the time the pandemic was fully going on and also in 2017, which was roughly my last year of school.
+
+We can also look at the average length per messages and see that it's slowly increasing over time:
+
+![Average length](/images/discord-sentiment/averageLength.png "Average length of messages over time")
+
+The average length also seems to be slightly lower during those very active periods. 
 
 ## Setting up services
 
@@ -78,8 +86,40 @@ Of course, many are probably neutral or mixed, but I was sceptical.
 Because I suspected that the sentiment analysis would work better if I provided it the correct language for each message, I ran all of those messages through language detection.
 This was easy, because the Azure Language service supported this right out of the box.
 
+You can see, english is by far my most used language on Discord, probably because I'm in a lot of online spaces and my real life friends are mostly german and not that active on Discord.
+
+![Languages](/images/discord-sentiment/languages.png "Language distribution")
+
+## Final sentiment
+
+After running through the entire sentiment analysis again, we can see the distribution of sentiment across all messages:
+
+![Sentiments](/images/discord-sentiment/sentiments.png "Sentiment distribution")
+
+We now can also look at the average sentiment over time:
+
+![Average sentiment](/images/discord-sentiment/averageSentiment.png "Average sentiment over time")
+
+As we can see, the average sentiment goes down during the time of the pandemic. I would say it's likely there's some correlation, but I'm too lazy to really dig into it. 
+
+## Some fun graphs
+
+Because I wanted to know which words I use really often, I split every message by spaces (and commas) and counted every one of them.
+
+I threw out all counts for a lot of common words, like "I", "you", etc., so that only the interesting things like slang words or domain-specific words remain.
+
+![Common words](/images/discord-sentiment/mostCommonWords.png "Most common words")
+
+If we take the top five of those, we can also see how often those were used over time:
+
+![Common words over time](/images/discord-sentiment/commonWordsTime.png "Top 5 most common words over time")
+
+There would be a possibility here to make this graph relative to the amount of messages sent in that timeframe, but I'm also too lazy for that ;)
+
 ## Cost
 
-Expensive, if I would've paid anything. Yes, I blew through the budget of my subscription, because Azure only updates the spending once a day. ;)
+Expensive, if I would've paid anything. Yes, I blew through the budget of my subscription, because Azure only updates the spending once a day :D
 
-![Cost](/images/sentiment-analysis/cost.png)
+![Cost](/images/discord-sentiment/cost.png "Cost of everything (289.85€)")
+
+Hope you enjoyed this small experiment! Feel free to check out the [repo](https://github.com/loudar/sentiment-analysis) and try it for yourself. Just keep the cost in mind :p 

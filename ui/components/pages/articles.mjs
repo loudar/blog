@@ -1,4 +1,5 @@
-import {computedSignal, create, signalMap, store} from "https://fjs.targoninc.com/f.js";
+import {create, signalMap, store} from "https://fjs.targoninc.com/f.js";
+import {CommonTemplates} from "../common.mjs";
 
 export class ArticlesComponent {
     static render(params, router) {
@@ -7,10 +8,11 @@ export class ArticlesComponent {
         return create("div")
             .classes("page", "articles")
             .children(
+                CommonTemplates.socialBar(),
                 create("h1")
                     .text("Articles")
                     .build(),
-                signalMap(articles, create("div").classes("article-list"),
+                signalMap(articles, create("div").classes("article-list", "flex-v"),
                         article => ArticlesComponent.articleInList(article))
             ).build();
     }
@@ -18,8 +20,9 @@ export class ArticlesComponent {
     static articleInList(article) {
         const fileCreated = new Date(article.fileCreated).toLocaleDateString();
 
-        return create("div")
+        return create("a")
             .classes("article-list-item", "flex", "space-between")
+            .href(`/article/${encodeURIComponent(article.title)}`)
             .onclick(e => {
                 if (e.button !== 0) {
                     return;
@@ -28,9 +31,8 @@ export class ArticlesComponent {
                 window.router.navigate(`/article/${encodeURIComponent(article.title)}`)
             })
             .children(
-                create("a")
+                create("span")
                     .classes("article-list-item-title")
-                    .href(`/article/${encodeURIComponent(article.title)}`)
                     .text(article.title)
                     .build(),
                 create("span")

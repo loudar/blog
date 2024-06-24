@@ -1,4 +1,5 @@
 import {computedSignal, create, store} from "https://fjs.targoninc.com/f.js";
+import {CommonTemplates} from "../common.mjs";
 
 export class ArticleComponent {
     static render(params, router) {
@@ -10,6 +11,7 @@ export class ArticleComponent {
         return create("div")
             .classes("page", "article")
             .children(
+                CommonTemplates.socialBar(),
                 create("a")
                     .classes("back-button")
                     .href("/")
@@ -25,7 +27,7 @@ export class ArticleComponent {
 
     static markdownToHtml(markdown) {
         const converter = new window.showdown.Converter();
-        const html = computedSignal(markdown, markdown => converter.makeHtml(markdown));
+        const html = computedSignal(markdown, markdown => converter.makeHtml(markdown).replaceAll(" href", ' target="_blank" href'));
 
         return create("div")
             .classes("article-content")
