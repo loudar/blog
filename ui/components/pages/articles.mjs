@@ -1,9 +1,12 @@
-import {create, signalMap, store} from "https://fjs.targoninc.com/f.js";
+import {computedSignal, create, signalMap, store} from "https://fjs.targoninc.com/f.js";
 import {CommonTemplates} from "../common.mjs";
 
 export class ArticlesComponent {
     static render(params, router) {
         const articles = store().get("articles");
+        const shownArticles = computedSignal(articles, list => {
+            return list.filter(a => !a.draft);
+        });
 
         return create("div")
             .classes("page", "articles")
@@ -12,7 +15,7 @@ export class ArticlesComponent {
                 create("h1")
                     .text("Articles")
                     .build(),
-                signalMap(articles, create("div").classes("article-list", "flex-v"),
+                signalMap(shownArticles, create("div").classes("article-list", "flex-v"),
                         article => ArticlesComponent.articleInList(article))
             ).build();
     }
