@@ -56,7 +56,7 @@ The average length also seems to be slightly lower during those very active peri
 Because my current employer has the benefit of getting 140€ worth of Microsoft Azure credits every month for free, I figured that'd be the easiest way of analyzing the data.
 I wanted to do some sentiment analysis, so I set up an Azure Language service instance.
 
-It had a rate limit of 5000 documents/texts I could analyze per minute, meaning it would definitely take a little whlie to finish.
+It had a rate limit of 5000 documents/texts I could analyze per minute, meaning it would definitely take a little while to finish.
 
 ## Sentiment analysis!
 
@@ -71,7 +71,7 @@ Sentiment analysis with Azure Language services gives you one of the following s
 }
 ```
 
-In addition, you get a `confidence` value for the chosen sentiment. By multiplying those two values, I had a rough direciton for the sentiment of the message.
+In addition, you get a `confidence` value for the chosen sentiment. By multiplying those two values, I had a rough direction for the sentiment of the message.
 The downside here is that my messages mostly consist of phrases and not full sentences, making it hard to actually get the correct sentiment.
 
 For example:
