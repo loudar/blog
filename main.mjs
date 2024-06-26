@@ -51,7 +51,41 @@ app.get("/article/:title", (req, res) => {
 });
 
 app.get('*', (req, res) => {
-    res.sendFile(__dirname + '/ui/index.html');
+    let image = "/images/blog_image.png";
+    let title = "ORANGE SPACE";
+    let description = "a blog about many things";
+    if (req.url.includes("/article/")) {
+        image = "/images/article.png";
+        const afterLastSlash = req.url.split("/").pop();
+        title = articles.find(article => article.title === afterLastSlash).title;
+        description = articles.find(article => article.title === afterLastSlash).content;
+    }
+
+    res.send(`<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ORANGE SPACE</title>
+    <meta property="og:image" content="${image}">
+    <meta name="twitter:image" content="${image}">
+    <meta property="og:title" content="${title}">
+    <meta name="twitter:title" content="${title}">
+    <meta property="og:description" content="${description}">
+    <meta name="twitter:description" content="${description}">
+    <link rel="apple-touch-icon" sizes="256x256" href="/images/blog_icon.png">
+    <link rel="icon" type="image/png" sizes="256x256" href="/images/blog_icon.png">
+    <link rel="stylesheet" href="/styles/reset.css">
+    <link rel="stylesheet" href="/styles/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/showdown@2.1.0/dist/showdown.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/an-old-hope.min.css" rel="stylesheet">
+    <script src="/index.mjs" type="module"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+</head>
+<body>
+
+</body>
+</html>`);
 });
 
 app.listen(process.env.PORT || 3001, () => {

@@ -1,7 +1,7 @@
 export const routes = [
     {
         path: 'articles',
-        title: 'Articles',
+        title: 'ORANGE SPACE',
         aliases: ['']
     },
     {
