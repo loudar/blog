@@ -40,4 +40,16 @@ export class CommonTemplates {
             .title(name)
             .build();
     }
+
+    static button(icon, text, onclick) {
+        return create("button")
+            .classes("flex")
+            .onclick(onclick)
+            .children(
+                CommonTemplates.matIcon(icon, ""),
+                create("span")
+                    .text(text)
+                    .build(),
+            ).build();
+    }
 }

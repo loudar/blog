@@ -361,7 +361,7 @@ p {
 
 .flex, .flex-v {
     display: flex;
-    gap: var(--gap-v);
+    gap: var(--gap-h);
 }
 
 .flex-v {
@@ -395,4 +395,16 @@ p {
 
 .inverted-icon {
     filter: var(--icon-filter) var(--icon-inversion);
+}
+
+pre.rendered {
+    padding: var(--gap-h);
+}
+
+code.rendered {
+    border: 1px solid var(--text-4);
+    width: 100%;
+    display: flex;
+    border-radius: var(--input-border-radius);
+    padding: var(--gap-h);
 }
