@@ -42,27 +42,8 @@ app.get("/articles", (req, res) => {
     res.json(articles);
 });
 
-app.get("/article/:title", (req, res) => {
-    const article = articles.find(article => article.title === req.params.title);
-    if (!article) {
-        res.status(404).send("Article not found");
-        return;
-    }
-    res.sendFile(__dirname + '/ui/index.html');
-});
-
-app.get('*', (req, res) => {
-    let image = "/images/blog_image.png";
-    let title = "ORANGE SPACE";
-    let description = "a blog about many things";
-    if (req.url.includes("/article/")) {
-        image = "/images/article.png";
-        const afterLastSlash = req.url.split("/").pop();
-        title = articles.find(article => article.title === afterLastSlash).title;
-        description = articles.find(article => article.title === afterLastSlash).content;
-    }
-
-    res.send(`<!DOCTYPE html>
+function getHtml(image, title, description) {
+    return `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -86,7 +67,24 @@ app.get('*', (req, res) => {
 <body>
 
 </body>
-</html>`);
+</html>`;
+}
+
+app.get("/article/:title", (req, res) => {
+    const article = articles.find(article => article.title === req.params.title);
+    if (!article) {
+        res.status(404).send("Article not found");
+        return;
+    }
+    const image = "/images/article.png";
+    res.send(getHtml(image, article.title, "Read this wonderful and amazing article"));
+});
+
+app.get('*', (req, res) => {
+    let image = "/images/blog_image.png";
+    let title = "ORANGE SPACE";
+    let description = "a blog about many things";
+    res.send(getHtml(image, title, description));
 });
 
 app.listen(process.env.PORT || 3001, () => {
