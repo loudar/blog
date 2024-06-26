@@ -22,17 +22,18 @@ const articles = articleFiles
     .map(file => {
         const filePath = path.join(articleFolder, file);
         const content = fs.readFileSync(filePath, "utf8");
-        const fileCreated = new Date(fs.statSync(filePath).birthtimeMs);
         const baseTitle = file.replaceAll(".md", "").replaceAll(".draft", "");
-        const title = baseTitle.split("-")[0].trim();
-        const id = baseTitle.split("-")[1].trim();
+        const title = baseTitle.split("-")[2].trim();
+        const dateBase = baseTitle.split("-")[1].trim();
+        const date = new Date(dateBase.substring(0, 4), dateBase.substring(4, 6) - 1, dateBase.substring(6, 8));
+        const id = baseTitle.split("-")[0].trim();
         const isDraft = file.includes("draft");
         return {
             title,
             id,
             content,
             draft: isDraft,
-            fileCreated
+            fileCreated: date
         };
     });
 

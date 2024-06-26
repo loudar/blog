@@ -37,6 +37,8 @@ That way, BGGEN will choose a base hue for the entire image and vary the hue at 
 
 This system is extensible to more shapes, eventually custom images and far more. It's essentially at the intersection of fully procedural art and an image editor.
 
+![BGGEN](/images/bggen/bggen-1.png "BGGEN")
+
 ### "The system should not violate any ethics whatsoever"
 
 I would be surprised if this violated any ethics. Since it's not trained on any art, but rather is a set of tools that can be used procedurally to get an image, that point is simply not a concern here.
