@@ -49,18 +49,21 @@ export class ArticleComponent {
             .build();
 
         for (const codeInPres of content.querySelectorAll("pre code")) {
+            const pre = codeInPres.parentElement;
+            pre.classList.add("flex-v", "rendered");
             if (codeInPres.innerText.trim().startsWith("{{md:execute-js}}")) {
                 const code = codeInPres.innerText.replaceAll("{{md:execute-js}}", "").trim();
                 const result = eval(`"use strict";(() => {${code}})()`);
                 codeInPres.innerHTML = "";
                 codeInPres.classList.add("rendered");
-                const pre = codeInPres.parentElement;
-                pre.classList.add("flex-v", "rendered");
                 pre.insertBefore(CommonTemplates.button("content_copy", "Copy code", () => {
                     navigator.clipboard.writeText(code);
                 }), pre.firstChild);
                 codeInPres.appendChild(result);
             } else {
+                pre.insertBefore(CommonTemplates.button("content_copy", "Copy code", () => {
+                    navigator.clipboard.writeText(codeInPres.innerText);
+                }), pre.firstChild);
                 hljs.highlightElement(codeInPres);
             }
         }
