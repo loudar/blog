@@ -350,7 +350,6 @@ li {
 }
 
 code:not(.rendered) {
-    background: var(--bg);
     font-size: 0.9em;
     font-weight: 600;
     border-radius: var(--input-border-radius);
