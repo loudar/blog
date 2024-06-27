@@ -1,4 +1,4 @@
-import {computedSignal, create, store} from "https://fjs.targoninc.com/f.js";
+import {computedSignal, create, signal, signalMap, store} from "https://fjs.targoninc.com/f.js";
 import {CommonTemplates} from "../common.mjs";
 import hljs from 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/es/highlight.min.js';
 import javascript
@@ -56,9 +56,9 @@ export class ArticleComponent {
                 const result = eval(`"use strict";(() => {${code}})()`);
                 codeInPres.innerHTML = "";
                 codeInPres.classList.add("rendered");
-                pre.insertBefore(CommonTemplates.button("content_copy", "Copy code", () => {
-                    navigator.clipboard.writeText(code);
-                }), pre.firstChild);
+                pre.insertBefore(create("span")
+                    .classes("rendered_text")
+                    .text("Rendered").build(), pre.firstChild);
                 codeInPres.appendChild(result);
             } else {
                 pre.insertBefore(CommonTemplates.button("content_copy", "Copy code", () => {
