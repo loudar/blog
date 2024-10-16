@@ -63,6 +63,7 @@ function getHtml(image, title, description) {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/an-old-hope.min.css" rel="stylesheet">
     <script src="/index.mjs" type="module"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <script defer data-domain="blog.blob.group" src="https://plausible.targoninc.com/js/script.js"></script>
 </head>
 <body>
 
