@@ -13,7 +13,7 @@ There are also attributes on these tags.
 
 By deriving from this syntax, they're forgetting something that I find to be interesting:
 
-A lot of frameworks in other spaces, like infrastructure actually care about simplifying the experience.
+A lot of frameworks in other spaces, like infrastructure, actually care about simplifying the experience.
 This is definitely not the case with Angular, React, or even svelte. One is probably better or worse than the others, but in this case it doesn't really matter which.
 
 The issue is the same in all three:

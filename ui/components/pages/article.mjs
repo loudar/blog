@@ -1,7 +1,8 @@
-import {computedSignal, create, store} from "https://fjs.targoninc.com/f.js";
+import {computedSignal, create, signal, signalMap, store} from "https://fjs.targoninc.com/f.js";
 import {CommonTemplates} from "../common.mjs";
 import hljs from 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/es/highlight.min.js';
-import javascript from 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/es/languages/javascript.min.js';
+import javascript
+    from 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/es/languages/javascript.min.js';
 import json from 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/es/languages/json.min.js';
 import css from 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/es/languages/css.min.js';
 import html from 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/es/languages/xml.min.js';
@@ -47,8 +48,24 @@ export class ArticleComponent {
             .html(html)
             .build();
 
-        for (const element of content.querySelectorAll("pre code")) {
-            hljs.highlightElement(element);
+        for (const codeInPres of content.querySelectorAll("pre code")) {
+            const pre = codeInPres.parentElement;
+            pre.classList.add("flex-v", "rendered");
+            if (codeInPres.innerText.trim().startsWith("{{md:execute-js}}")) {
+                const code = codeInPres.innerText.replaceAll("{{md:execute-js}}", "").trim();
+                const result = eval(`"use strict";(() => {${code}})()`);
+                codeInPres.innerHTML = "";
+                codeInPres.classList.add("rendered");
+                pre.insertBefore(create("span")
+                    .classes("rendered_text")
+                    .text("Rendered").build(), pre.firstChild);
+                codeInPres.appendChild(result);
+            } else {
+                pre.insertBefore(CommonTemplates.button("content_copy", "Copy code", () => {
+                    navigator.clipboard.writeText(codeInPres.innerText);
+                }), pre.firstChild);
+                hljs.highlightElement(codeInPres);
+            }
         }
 
         return content;
